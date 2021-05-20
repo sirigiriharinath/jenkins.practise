@@ -1,6 +1,10 @@
+folder('ci-pipelines') {
+  displayname ('Projecr A')
+  description('folder for project A')
+}
 pipelinejob('frontend') {
   configure { flowdefintion ->
-    flowdefintion << delegate.'defination'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmflowDefination',plugin:'workflow-cps'){
+    flowdefintion << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmflowDefinition',plugin:'workflow-cps'){
       'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git'){
         'userRemoteConfigs' {
           'hudson.plugins.git.UserRemoteconfig' {
