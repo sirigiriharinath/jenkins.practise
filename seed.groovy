@@ -13,7 +13,7 @@ pipelinejob('frontend') {
           }  
         } 
         'branches' {
-           'hudson.plugins.git.Branchspec' {
+           'hudson.plugins.git.Branchspec' { 
               'name'('*/main')
            } 
         }
