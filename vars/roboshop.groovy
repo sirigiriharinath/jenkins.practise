@@ -16,7 +16,7 @@ def call() {
     stage('Upload Artifacts') {
       steps {
         sh '''
-         curl -v -u admin:admin --upload-file frontend.zip http://10.1.2.210:8081/nexus/repository/Frontend/frontend.zip
+         curl -f -v -u admin:admin --upload-file frontend.zip http://10.1.2.210:8081/repository/Frontend/frontend.zip
         '''
       }
     }
