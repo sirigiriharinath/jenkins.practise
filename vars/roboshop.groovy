@@ -8,8 +8,8 @@ def call() {
       steps {
          sh '''
            cd static
-           zip ../frontend.zip "
-        ...     
+           zip ../frontend.zip *
+        '''     
       }  
     }
 
