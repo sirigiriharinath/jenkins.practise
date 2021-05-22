@@ -38,7 +38,7 @@ def call(Map params = [:]) {
     }
     stage('Download Dependencies') {
 	    when {
-	      environment name: 'APP_TYPE', value: 'NODE.JS'
+	      environment name: 'APP_TYPE', value: 'NODEJS'
 	  	}
 	
 	    steps {
@@ -50,7 +50,7 @@ def call(Map params = [:]) {
       
     stage('Prepare Artifacts - NODE.JS') {    
       when {
-	      environment name: 'APP_TYPE', value: 'NODE.JS' 
+	      environment name: 'APP_TYPE', value: 'NODEJS' 
       }
  		
       steps {
