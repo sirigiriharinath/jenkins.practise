@@ -9,14 +9,14 @@ def call(Map params = [:]) {
 
   pipeline {
     agent {
-      label "${args.MASTER_LABEL}"
+      label "${args.SLAVE_LABEL}"
     }
 
   environment {
     COMPONENT       =  "${args.COMPONENT}"
     NEXUS_IP        =  "${args.NEXUS_IP}"
     PROJECT_NAME    =  "${args.PROJECT_NAME}"
-    MASTER_LABEL     =  "${args.MASTER_LABEL}"
+    SLAVE_LABEL     =  "${args.SLAVE_LABEL}"
     APP_TYPE        =   "${args.APP_TYPE}"
   }
 
