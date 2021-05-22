@@ -17,13 +17,14 @@ def call(Map params = [:]) {
     NEXUS_IP        =  "${args.NEXUS_IP}"
     PROJECT_NAME    =  "${args.PROJECT_NAME}"
     MASTER_LABEL     =  "${args.MASTER_LABEL}"
+    APP_TYPE        =   "${args.APP_TYPE}"
   }
 
   stages {
 
-    stage('prepare artifacts') {
+    stage('Prepare Artifacts - NGINX') {
       when {
-        environment name: 'COMPONENT', value: 'frontend'
+        environment name: 'AAP_TYPE', value: 'NGINX'
         
       } 
 
@@ -34,6 +35,37 @@ def call(Map params = [:]) {
            zip -r ../${COMPONENT}.zip *
         '''     
       }  
+    }
+    stage('Download Dependencies') {
+	    when {
+	      environment name: 'APP_TYPE', value: 'NODE.JS'
+	  	}
+	
+	    steps {
+	      sh '''
+		    npm install
+		  '''  
+		  }
+	 }	
+      
+    stage('Prepare Artifacts - NODE.JS') {    
+      when {
+	      environment name: 'APP_TYPE', value: 'NODE.JS' 
+      }
+ 		
+      steps {
+	    sh '''
+		  zip -r user.zip node_modules server.js
+    '''     
+      }  
+    }
+
+    stage('Upload Artifacts - user') {
+      steps {
+        sh '''
+         curl -f -v -u admin:admin --upload-file user.zip http://10.1.2.210:8081/repository/user/user.zip
+        '''
+      }
     }
 
     stage('Upload Artifacts') {
