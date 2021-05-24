@@ -1,4 +1,4 @@
-seed.groovy file(jenkins repo)
+seed.groovy file( jenkins repo )
      
 folder('CI-Pipelines') {
   displayName('CI Pipelines')
