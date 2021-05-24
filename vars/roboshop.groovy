@@ -24,11 +24,9 @@ def call(Map params = [:]) {
 
     stage('Prepare Artifacts - NGINX') {
       when {
-        environment name: 'APP_TYPE', value: 'NGINX'
+            environment name: 'APP_TYPE', value: 'NGINX'
         
       } 
-
-
       steps {
          sh '''
            cd static
