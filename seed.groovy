@@ -23,7 +23,7 @@ for (i in 0..count) {
             }
           }
         }
-        'scriptPath'('jenkins.practise')
+        'scriptPath'('jenkinsfile')
         'lightweight'(true)
       }
     }
