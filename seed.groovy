@@ -1,25 +1,36 @@
-folder('ci-pipelines') {
-  displayname ('Projecr A')
-  description('folder for project A')
+seed.groovy file(jenkins repo)
+     
+folder('CI-Pipelines') {
+  displayName('CI Pipelines')
+  description('CI Pipelines')
 }
-pipelinejob('frontend') {
-  configure { flowdefintion ->
-    flowdefintion << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmflowDefinition',plugin:'workflow-cps'){
-      'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git'){
-        'userRemoteConfigs' {
-          'hudson.plugins.git.UserRemoteconfig' {
-              'url'('https://github.com/sasender/frontend.git')
-          
-          }  
-        } 
-        'branches' {
-           'hudson.plugins.git.Branchspec' { 
+
+def component = ["frontend","users","login","todo"];
+
+def count=(component.size()-1)
+for (i in 0..count) {
+  def j=component[i]
+  pipelineJob("CI-Pipelines/${j}-ci") {
+    configure { flowdefinition ->
+      flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+        'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+          'userRemoteConfigs' {
+            'hudson.plugins.git.UserRemoteConfig' {
+              'url'('https://github.com/sasender/'+j+'.git')
+            }
+          }
+          'branches' {
+            'hudson.plugins.git.BranchSpec' {
               'name'('*/main')
-           } 
+            }
+          }
         }
+        'scriptPath'('Jenkinsfile')
+        'lightweight'(true)
       }
-      'scriptpath'('jenkins.practise')
-      'lightweight' (true)  
     }
-  }  
+  }
 }
+
+
+
