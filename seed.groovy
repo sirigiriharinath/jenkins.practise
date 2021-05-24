@@ -14,7 +14,7 @@ for (i in 0..count) {
         'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
           'userRemoteConfigs' {
             'hudson.plugins.git.UserRemoteConfig' {
-              'url'('https://github.com/sasender/'+j+'.git')
+              'url'('https://github.com/sasender/frontend-1.git/'+j+'.git')
             }
           }
           'branches' {
