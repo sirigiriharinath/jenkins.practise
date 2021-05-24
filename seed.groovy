@@ -1,4 +1,3 @@
-    
 folder('CI-Pipelines') {
   displayName('CI Pipelines')
   description('CI Pipelines')
@@ -24,7 +23,7 @@ for (i in 0..count) {
             }
           }
         }
-        'scriptPath'('Jenkinsfile')
+        'scriptPath'('jenkins.practise')
         'lightweight'(true)
       }
     }
