@@ -9,7 +9,7 @@ def call(Map params = [:]) {
 
   pipeline {
     agent {
-      label "${args.SLAVE_LABEL}"
+      label "${args.NODEJS_LABEL}"
     }
 
   environment {
