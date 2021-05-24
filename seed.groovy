@@ -51,13 +51,13 @@ for (i in 0..count) {
     }
   }
 
-  pipelineJob("CI-Pipelines/user") {
+  pipelineJob("CI-Pipelines/users") {
     configure { flowdefinition ->
       flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
         'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
           'userRemoteConfigs' {
             'hudson.plugins.git.UserRemoteConfig' {
-              'url'('https://github.com/sasender/user.git')
+              'url'('https://github.com/sasender/users.git')
             }
           }
           'branches' {
