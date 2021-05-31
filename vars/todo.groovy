@@ -11,12 +11,8 @@ def call(Map params = [:]) {
     agent {
       label "${args.SLAVE_LABEL}"
     }
-    triggers {
-       pollSCM('* * * * 1-5')
-    }
-    tools {
-        maven 'mvn'
-    }
+      
+  
 
   environment {
     COMPONENT       =  "${args.COMPONENT}"
