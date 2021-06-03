@@ -59,12 +59,13 @@ for (i in 0..count) {
           'userRemoteConfigs' {
             'hudson.plugins.git.UserRemoteConfig' {
               'url'('https://github.com/sasender/users.git')
+              'refspec'('\'+refs/tags/*\':\'refs/remotes/origin/tags/*\'')
             }
           }
           'branches' {
             'hudson.plugins.git.BranchSpec' {
-              'name'('*/main')
-            }
+              'name'('*/tags/*')
+                          }
           }
         }
         'scriptPath'('jenkinsfile')
