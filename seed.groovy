@@ -52,7 +52,7 @@ for (i in 0..count) {
     }
   }
 
-  pipelineJob("CI-Pipelines/users") {
+  pipelineJob("CI-Pipelines/users-ci") {
     configure { flowdefinition ->
       flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
         'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
