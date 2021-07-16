@@ -24,7 +24,7 @@ for (i in 0..count) {
             }
           }
         }
-        'scriptPath'('jenkinsfile')
+        'scriptPath'('Jenkinsfile')
         'lightweight'(true)
       }
     }
@@ -46,7 +46,7 @@ for (i in 0..count) {
             }
           }
         }
-        'scriptPath'('jenkinsfile')
+        'scriptPath'('Jenkinsfile')
         'lightweight'(true)
       }
     }
@@ -68,7 +68,7 @@ for (i in 0..count) {
                           }
           }
         }
-        'scriptPath'('jenkinsfile')
+        'scriptPath'('Jenkinsfile')
         'lightweight'(true)
       }
     }
@@ -89,7 +89,7 @@ for (i in 0..count) {
             }
           }
         }
-        'scriptPath'('jenkinsfile')
+        'scriptPath'('Jenkinsfile')
         'lightweight'(true)
       }
     }
