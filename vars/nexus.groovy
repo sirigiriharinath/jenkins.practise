@@ -11,26 +11,27 @@ def make_artifacts(APP_TYPE, COMPONENT) {
   println("abc${get_branch_exec}abc")
   def FILENAME=COMPONENT+'-'+get_branch_exec+'.zip'
   if(APP_TYPE == "NGINX") {
-    command = " zip -r ${FILENAME} * "
+    command = " zip -r ${FILENAME} ."
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
   } 
   else if(APP_TYPE == "NODEJS") {
-    command = "zip -r ${FILENAME} * "
+    command = "zip -r ${FILENAME} ."
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
   } 
   else if(APP_TYPE == "JAVA") {
-    command = "cp target/*.jar ${COMPONENT}.jar && zip -r ${FILENAME} ${COMPONENT}.jar"
+    command = "cp target/*.jar ${COMPONENT}.jar && zip -r ${FILENAME} ."
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  }
-   else if(APP_TYPE == "GOLANG") {
-    command = "zip -r ${FILENAME} * "
+  } 
+  else if(APP_TYPE == "GOLANG") {
+    command = "zip -r ${FILENAME} ."
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
   }
 }
+
 def code_build(APP_TYPE, COMPONENT) {
   if(APP_TYPE == "NODEJS") {
     command = "npm install"
@@ -41,14 +42,14 @@ def code_build(APP_TYPE, COMPONENT) {
     command = "mvn clean package"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  }
-   else if(APP_TYPE == "GOLANG") {
-    command = "go build"
+  } 
+  else if(APP_TYPE == "GOLANG") {
+    command = "  go get github.com/dgrijalva/jwt-go && go get github.com/labstack/echo && go get github.com/labstack/echo/middleware && go get github.com/labstack/gommon/log && go get github.com/openzipkin/zipkin-go && go get github.com/openzipkin/zipkin-go/middleware/http && go get github.com/openzipkin/zipkin-go/reporter/http &&  go build"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
-  }
-   else if(APP_TYPE == "NGINX") {
-    command = "npm install && npm run build"
+  } 
+  else if(APP_TYPE == "NGINX") {
+    command = "sudo npm install && sudo npm run build"
     def execute_com=sh(returnStdout: true, script: command)
     print execute_com
   }
