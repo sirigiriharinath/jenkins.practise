@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+	environment {
+	    king="lots of values in the kingdom"
+	}
+	stages {
+	    stage (build) {
+		    environment {
+			    king="he is the only person to changes the rules"
+			}
+			steps {
+			    script {
+				king="he is the ruler of the king dom"
+				}
+				echo "jhon $king and $env.king"
+			}
+		}
+	}
+}	

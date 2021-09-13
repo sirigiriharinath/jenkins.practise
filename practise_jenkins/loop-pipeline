@@ -1,0 +1,25 @@
+pipeline{
+    agent any
+    environment{
+        Tools='Jenkins'
+    }
+    stages{
+        stage('conditions'){
+            steps{
+              script{
+                for(i=0;i<=5;i++){
+                    println i
+ 
+                 }
+
+                 int buildno="$BUILD_NUMBER"
+                if(buildno %2 == 0){
+                            echo 'builno is even'
+                        }else{
+                          echo 'buildno is odd'
+                        }
+                }
+            }
+        }  
+    }
+}

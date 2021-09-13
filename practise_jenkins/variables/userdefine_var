@@ -1,0 +1,73 @@
+
+#user define varibels mention in global level 
+
+pipeline {
+    agent any
+	environment {
+	     myrepo="bangaloore declare the holidays from 10 sep"
+	}
+    stages {
+        stage (holidays) {
+            steps { 
+                echo "$myrepo"
+            }
+        }
+    }
+}
+
+
+#user variavbles described in stage level 
+pipeline {
+    agent any
+	stages {
+	    stage (build) {
+		    environment {
+			    myrepo="ipl 14th addition will be start on sep 14"
+			}
+            steps {
+				echo "$myrepo"
+			}
+		}
+	}
+}	
+
+
+#user variavbles described in scripts level
+
+pipeline {
+    agent any
+	stages {
+	    stage ('script-level') {
+		    steps {
+		        script {
+			    myrepo="bangaloore won by 6 wickets"
+			    }
+				echo "$myrepo"
+			}
+		}
+	}
+}	
+
+#user define values pick up the from scripts, stage,global or root level 
+
+pipeline {
+    agent any
+	environment {
+	    myrepo="delhi"
+	}
+    stages {
+        stage (build) {
+        	environment {
+				myrepo="jamica"
+			}
+			steps {
+			    echo "the builder is $myrepo"
+			}
+		}
+	}
+}	
+
+
+
+
+
