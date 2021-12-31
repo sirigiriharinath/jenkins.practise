@@ -1,0 +1,82 @@
+Building from SCM
+Introduction
+In this lab we configure Maven to perform a build. This includes pulling the source code for the build from SCM. At the end of the build process, we also create an artifact for the build.
+
+Solution
+Configure Maven Installer
+Use a browser to navigate to the provided public IP address for the server. Remember to add ":8080" to the end of the IP address to specify the default Jenkins port.
+The Jenkins login information is as follows:
+
+User: student
+Password: OmgPassword!
+Log in with the credentials provided in the lab guide instructions.
+
+Update Jenkins plugins
+Click the bell icon.
+
+Apply Migration.
+Click the bell icon.
+Choose Manage Jenkins.
+Choose Go to plugin manager.
+Select all, Download now and install after restart
+Wait to checkmark the "Restart Jenkins when installation is complete and no jobs are running" until all items have been marked for an action.
+Reconnect to Jenkins.
+
+Configure Maven Installer
+Click Manage Jenkins.
+
+Click Global Tool Configuration.
+
+Under Maven installations, click Add Maven.
+
+In the Name box, enter "M3".
+
+Make sure Install automatically is checked.
+
+Click Save.
+
+Configure the Build to Use Maven and Make the Index File
+Click New Item.
+
+Enter an item name of "mavenproject" in the box provided.
+
+Select Freestyle project.
+
+Click OK.
+
+Click the Source Code Management tab at the top of the screen.
+
+Select the option for a Git repository.
+
+Copy the git repository link from the lab instructions and enter it into the Repository URL box.
+
+Click the Build tab at the top of the screen.
+
+Click Add build step and select the Invoke top-level Maven targets option.
+
+Under Maven Version, select M3.
+
+In the Goals box, enter "clean package".
+
+Click Add build step and select the Execute shell option.
+
+In the Command window, enter "bin/makeindex".
+
+Click Add post-build action and select the Archive the artifacts option.
+
+Inside the Archive the artifacts box, click Advanced...
+
+Check the option for Fingerprint all archived artifacts.
+
+In the Files to archive box, enter "index.jsp".
+
+Click Save.
+
+Click Build Now.
+
+Refresh the window and click the View link next to index.jsp. Verify the contents of the index.jsp file.
+
+Conclusion
+Congratulations — you've completed this hands-on lab!
+
+https://github.com/linuxacademy/content-cje-prebuild.git
