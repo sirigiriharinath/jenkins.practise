@@ -1,0 +1,68 @@
+Build Triggers
+Introduction
+In this lab we will be looking at the way jobs interact with one another. This is part of the process of making a pipeline in which one job's build launches the build of another job. We will be passing artifacts and using parameters.
+
+The Scenario
+All of the projects that have been created so far have been isolated, and it is now time to link the jobs. Create the index project in webdev, and the tomcat project in backend. Remember that the index project should take a name argument, and that the artifact of the index project needs to be sent to the tomcat project. The tomcat project should watch the index project to know when to build.
+
+These projects use the Maven M3 server. The index project needs to run bin/makeindex to create the index.jsp.
+
+tomcat needs to pull from index. The archive path in tomcat is src/main/webapp/index.jsp.
+
+Logging In
+Use a web browser to log into Jenkins at the lab server's public IP on port 8080. Here are the credentials:
+
+user: student
+pass: OmgPassword!
+index GitHub repository:
+
+https://github.com/linuxacademy/content-cje-prebuild.git
+
+tomcat GitHub repository:
+
+https://github.com/linuxacademy/content-jenkinscert.git
+
+The Copy Artifact Plugin
+We need the Copy Artifact plugin, so let's navigate to Manage Jenkins in the left menu, choose Manage Plugins from the list here, and then get into the Availability tab. There's a Filter where we can start typing the name of the plugin, Copy Artifact. Check the box next to it once it shows up in the list, then click the Download now and install after restart button down below.
+
+We'll get bumped out to another page where we can check a box next to Restart Jenkins when installation is complete and no jobs are running. Jenkins should restart now. Wait a bit, then refresh the browser.
+
+Create webdev/index and Archive index.jsp
+Once Jenkins is back up and running, Click New Item from the menu back out on the main page. In the item name field, type webdev, then click on the Folder option in the list below. Click OK. We'll land on a page where we can change properties and details, but just click Save down at the bottom to accept the defaults.
+
+Now, in that webdev folder, we can click on the create new jobs link. On the next screen, enter an item name of index. Click on Freestyle project, then OK. On the next screen, we want to check the This is a parameterized project box, and choose String Parameter from the dropdown that appears. Set these values in the form that we see:
+
+Name: name
+Default Value: steve
+Once those are set, we can navigate (in the tabs near the top of the screen) to Source Code Management. Select Git from the list, and use https://github.com/linuxacademy/content-cje-prebuild.git as the Repository URL.
+
+Scroll down a bit to the Build section, and in the Add build step dropdown, choose Invoke top-level Maven targets. In the Goals input box that appears, type clean package.
+
+Click the Add build step dropdown again, but this time choose Execute shell. In the Command text area, enter bin/makeindex.
+
+Now we can scroll down a bit farther to the Post-build Actions section. Click the Add post-build action dropdown and choose Archive the artifacts. In the Files to archive box that appears, type index.jsp, then click on the Advanced... button over to the right. In the list of things that show up down below, check Fingerprint all archived artifacts, then click the Save button below the list.
+
+Let's navigate back to Manage Jenkins in the left menu, and choose Global Tool Configuration from the list. Scroll down to the Maven section, click the Add Maven button, give it a Name of M3, and click the Save button.
+
+Now let's navigate back to our webdev folder. Click on the Jenkins link up in the main menu, then the webdev link (out in the main work area), and click on index. Click on the Configure link (in the left-hand menu), get into the Build Environment tab, and scroll down to the Build section. We should see a Maven Version dropdown where we can select M3. Click Save.
+
+Create backend and tomcat Folders
+Click New Item from the menu back out on the main page. In the item name field, type backend, then click on the Folder option in the list below. Click OK. We'll land on a page again where we can change properties and details, but we're just going to click Save down at the bottom to accept these defaults too.
+
+We should be sitting in the backend folder. Repeat the last process from here to create a tomcat subfolder.
+
+Create a tomcat Job
+From within that tomcat folder, we're going to set up a job. Click on create new jobs here. In the Enter an item name box, enter tomcat, then click on Freestyle project. Navigate (in the tabs near the top of the screen) to Source Code Management. Select Git from the list, and use https://github.com/linuxacademy/content-jenkinscert.git as the Repository URL.
+
+Now we can scroll down to Build Triggers, check the Build after other projects are built box, and enter webdev/index in the Projects to watch box. Select Trigger only if build is stable from the list right below that.
+
+Let's scroll down to the Build section, and click Add build step. Choose Copy artifacts from another project. In the next form that shows up, we can enter webdev/index in the Project name field, index.jsp in the Artifacts to copy field, and set the Target directory field to src/main/webapp.
+
+Click Add build step again and choose Invoke top-level Maven targets from the dropdown. Set the Maven Version to M3, and the Goals to clean package. Once we're done that, we can click Save.
+
+Build It
+Now go back out to the main Jenkins area (by clicking it in the uppermost left menu choice on the screen), and navigate to webdev. Click the button on the right to schedule a build. We'll be prompted to enter parameters. Just type steve in the name text box, and click the Build button. Now we can navigate back out to the main Jenkins page and watch the webdev >> index build status.
+
+Once that's complete, backend >> tomcat >> tomcat should start building. After that finishes, we can navigate to the tomcat project (In the top menu, click at Jenkins, then click backend, tomcat, and tomcat in the main part of the interface). In there, we can click on the Workspace icon, then the src folder link, then main, webapp, and finally the view link next to index.jsp.
+
+We should see a Hello steve... message in there.
