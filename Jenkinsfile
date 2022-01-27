@@ -27,14 +27,14 @@ pipeline {
       stage('Run Docker container on Jenkins Agent') {
              
             steps {
-                sh "docker run -d -p 4035:80 sasender/nginx"
+                sh "docker run -d -p 4038:80 sasender/nginx"
  
             }
         }
  stage('Run Docker container on remote hosts') {
              
             steps {
-                sh "docker -H ssh://jenkins@172.31.89.10 run -d -p 4001:80 sasender/nginx"
+                sh "docker -H ssh://jenkins@172.31.8.218 run -d -p 4001:80 sasender/nginx"
  
             }
         }
