@@ -4,9 +4,9 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t nginxtest:latest .' 
-                  sh 'docker tag nginxtest sasender/nginxtest:latest'
-                sh 'docker tag nginxtest sasender/nginxtest:$BUILD_NUMBER'
+                sh 'docker build -t nginx:latest .' 
+                  sh 'docker tag nginx sasender/nginxtest:latest'
+                sh 'docker tag nginx sasender/nginxtest:$BUILD_NUMBER'
                
           }
         }
@@ -15,8 +15,8 @@ pipeline {
           
             steps {
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-          sh  'docker push sasender/nginxtest:latest'
-          sh  'docker push sasender/nginxtest:$BUILD_NUMBER' 
+          sh  'docker push sasender/nginx:latest'
+          sh  'docker push sasender/nginx:$BUILD_NUMBER' 
         }
                   
           }
@@ -25,7 +25,7 @@ pipeline {
       stage('Run Docker container on Jenkins Agent') {
              
             steps {
-                sh "docker run -d -p 4030:80 sasender/nginxtest"
+                sh "docker run -d -p 4030:80 sasender/nginx"
  
             }
         }
