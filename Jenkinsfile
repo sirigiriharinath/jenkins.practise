@@ -5,6 +5,7 @@ pipeline {
            steps {
               
                 sh 'docker build -t nginx:latest .' 
+                sh  'chmod 777 /var/run/docker.sock'
                   sh 'docker tag nginx sasender/nginxtest:latest'
                 sh 'docker tag nginx sasender/nginxtest:$BUILD_NUMBER'
                
