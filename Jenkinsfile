@@ -4,7 +4,7 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh  'chmod 777 /var/run/docker.sock'
+                sh  'sudo chmod 777 /var/run/docker.sock'
                 sh 'docker build -t nginx:latest .' 
                 
                   sh 'docker tag nginx sasender/nginxtest:latest'
