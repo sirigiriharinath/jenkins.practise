@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent  {label 'mercy'}
  stages {
   stage('Docker Build and Tag') {
            steps {
