@@ -30,5 +30,7 @@ pipeline {
                 sh "docker run -d -p 4038:80 sasender/nginx"
  
             }
-        }
+     
+         }
+    }
 }
