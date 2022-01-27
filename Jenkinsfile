@@ -27,7 +27,7 @@ pipeline {
       stage('Run Docker container on Jenkins Agent') {
              
             steps {
-                sh "docker run -d -p 4030:80 sasender/nginx"
+                sh "docker run -d -p 4035:80 sasender/nginx"
  
             }
         }
