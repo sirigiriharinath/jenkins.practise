@@ -7,8 +7,8 @@ pipeline {
                 sh  'sudo chmod 777 /var/run/docker.sock'
                 sh 'docker build -t nginx:latest .' 
                 
-                  sh 'docker tag nginx sasender/nginxtest:latest'
-                sh 'docker tag nginx sasender/nginxtest:$BUILD_NUMBER'
+                  sh 'docker tag nginx sasender/nginx:latest'
+                sh 'docker tag nginx sasender/nginx:$BUILD_NUMBER'
                
           }
         }
