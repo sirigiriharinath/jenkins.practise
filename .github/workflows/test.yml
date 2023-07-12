@@ -1,8 +1,10 @@
 name: Release Workflow
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
+    inputs:
+      tagid:
+      description: "Tag ID"
+      required: true
 
 jobs:
   release:
